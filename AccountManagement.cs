@@ -206,64 +206,72 @@ namespace Bank_Account
 
         }
 
-        public bool start()
+       public bool start()
         {
             while (true)
             {
-                string[] lines = File.ReadAllLines("Accounts/" + ID + ".txt");
+                if (File.Exists(("Accounts/" + ID + ".txt"))){
+                    string[] lines = File.ReadAllLines("Accounts/" + ID + ".txt");
 
-                Console.WriteLine("\n\n-----Welcome, " + lines[1]  + "! -----\n");
-                Console.WriteLine("1)Display your balance");
-                Console.WriteLine("2)Deposit money");
-                Console.WriteLine("3)Withdraw money");
-                Console.WriteLine("4)Transfer money");
-                Console.WriteLine("5)Change your password");
-                Console.WriteLine("6)Delete your account");
-                Console.WriteLine("7)Back");
-                Console.WriteLine("8)Exit");
-                int c;
-                string p;
-                Console.Write("\nSelect your action: ");
+                    Console.WriteLine("\n\n-----Welcome, " + lines[1] + "! -----\n");
+                    Console.WriteLine("1)Display your balance");
+                    Console.WriteLine("2)Deposit money");
+                    Console.WriteLine("3)Withdraw money");
+                    Console.WriteLine("4)Transfer money");
+                    Console.WriteLine("5)Change your password");
+                    Console.WriteLine("6)Delete your account");
+                    Console.WriteLine("7)Back");
+                    Console.WriteLine("8)Exit");
+                    int c;
+                    string p;
+                    Console.Write("\nSelect your action: ");
 
-                p = Console.ReadLine();
-                if (!(p == "1" || p == "2" || p == "3" || p == "4" || p == "5" || p == "6" || p == "7" || p == "8"))
-                {
-                    Console.WriteLine("SELECT A VALID NUMBER");
+                    p = Console.ReadLine();
+                    if (!(p == "1" || p == "2" || p == "3" || p == "4" || p == "5" || p == "6" || p == "7" || p == "8"))
+                    {
+                        Console.WriteLine("SELECT A VALID NUMBER");
+                    }
+
+
+                    else
+                    {
+                        c = Convert.ToInt32(p);
+                        switch (c)
+                        {
+                            case 1:
+                                this.displayBalance();
+                                break;
+                            case 2:
+                                this.depositMoney();
+                                break;
+                            case 3:
+                                this.withdrawMoney();
+                                break;
+                            case 4:
+                                this.transferMoney();
+                                break;
+                            case 5:
+                                this.changePassword();
+                                break;
+                            case 6:
+                                this.deleteAccount();
+                                break;
+                            case 7:
+                                return false;
+                                break;
+                            case 8:
+                                Environment.Exit(0);
+                                break;
+
+                        }
+                    }
+
                 }
-
-
                 else
                 {
-                    c = Convert.ToInt32(p);
-                    switch (c)
-                    {
-                        case 1:
-                            this.displayBalance();
-                            break;
-                        case 2:
-                            this.depositMoney();
-                            break;
-                        case 3:
-                            this.withdrawMoney();
-                            break;
-                        case 4:
-                            this.transferMoney();
-                            break;
-                        case 5:
-                            this.changePassword();
-                            break;
-                        case 6:
-                            this.deleteAccount();
-                            break;
-                        case 7:
-                            return false;
-                            break;
-                        case 8:
-                            Environment.Exit(0);
-                            break;
-
-                    }
+                    return false;
                 }
+                
 
             }
         }
